@@ -15,16 +15,18 @@ struct EmojiArt: Codable {
     
     init? (json: Data?){
         if json != nil,
-           let newEmojiArt = try? JSONDecoder.decode(EmojiArt.self, from: json!){
+           let newEmojiArt = try? JSONDecoder().decode(EmojiArt.self, from: json!) {
             self = newEmojiArt
         }
     }
     
-    
+    init(){
+        
+    }
     var backgroundURL: URL?
     var emojis = [Emoji]()
     
-    struct Emoji: Identifiable, Codable{
+    struct Emoji: Identifiable, Codable, Hashable{
         let text: String
         var x: Int
         var y: Int

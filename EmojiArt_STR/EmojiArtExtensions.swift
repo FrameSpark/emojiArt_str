@@ -62,6 +62,24 @@ extension CGPoint {
     }
 }
 
+extension CGSize {
+    static  func +(lhs: Self, rhs: Self) -> CGSize {
+        CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+    }
+    
+    static  func -(lhs: Self, rhs: Self) -> CGSize {
+        CGSize(width: lhs.width - rhs.width, height: lhs.height - rhs.height)
+    }
+    
+    static  func *(lhs: Self, rhs: CGFloat) -> CGSize {
+        CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
+    }
+    
+    static  func /(lhs: Self, rhs: CGFloat) -> CGSize {
+        CGSize(width: lhs.width / rhs, height: lhs.height / rhs)
+    }
+}
+
 extension Array where Element == NSItemProvider {
     func loadObjects<T>(ofType theType: T.Type, firstOnly: Bool = false, using load: @escaping (T) -> Void) -> Bool where T: NSItemProviderReading {
         if let provider = self.first(where: {$0.canLoadObject(ofClass: theType)}){
