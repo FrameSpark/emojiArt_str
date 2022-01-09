@@ -18,6 +18,8 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable {
     
     @Published var steadyStateZoomScale: CGFloat = 1.0
     @Published var steadyStatePanOffset: CGSize = .zero
+    //Выбранные эмоджи
+    @Published private(set) var selectedEmojis = Set<EmojiArt.Emoji>()
     
     private let defaultEmojiSize: CGFloat = 50
     
@@ -46,7 +48,7 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable {
         }
         fetchBackgroundImageData()
     }
-
+    
     var emojis: [EmojiArt.Emoji] {emojiArt.emojis}
     
     var backgroundURL: URL? {
@@ -59,15 +61,32 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable {
         }
     }
     
+    //Удалить выделение всех эмоджи
+    func unSelectAllEmojis() {
+        selectedEmojis.removeAll()
+    }
+    
+    //Выбор эмоджи
+    func selectEmoji(_ emoji: EmojiArt.Emoji) {
+        selectedEmojis.toggleMatching(selected: emoji) //функция описана в расширении
+    }
+    
     func addEmoji(_ emoji: String, at location: CGPoint, size: CGFloat){
         emojiArt.addEmoji(emoji, x: Int(location.x), y: Int(location.y), size: Int(size))
+    }
+    
+    func deleteEmoji(_ emoji: EmojiArt.Emoji) {
+        if let index = emojiArt.emojis.firstIndex(matching: emoji) {
+            emojiArt.emojis.remove(at: index)
+            
+        }
     }
     
     func moveEmoji(_ emoji: EmojiArt.Emoji, by offset: CGSize){
         if let index = emojiArt.emojis.firstIndex(matching: emoji){
             emojiArt.emojis[index].x += Int(offset.width)
             emojiArt.emojis[index].y += Int(offset.height)
-
+            
         }
     }
     

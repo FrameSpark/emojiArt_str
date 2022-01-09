@@ -145,3 +145,14 @@ extension String {
         return uniqued
     }
 }
+
+//Функция для выбора эмоджи
+extension Set where Element: Identifiable {
+    mutating func toggleMatching(selected element: Element) {
+        if self.contains(matching: element) {
+            self.remove(element)
+        } else {
+            self.insert(element)
+        }
+    }
+}
