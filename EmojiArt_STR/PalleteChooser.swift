@@ -22,13 +22,14 @@ struct PalleteChooser: View {
                 self.chosenPallete = self.document.palette(before: self.chosenPallete)
             }, label: {EmptyView()})
             Text(self.document.paletteNames[self.chosenPallete] ?? "")
+            
             Image(systemName: "keyboard")
                 .imageScale(.large)
                 .onTapGesture {
                     self.showPaletteEditor = true
                 }
-                .popover(isPresented: $showPaletteEditor) {
-                    PaletteEditor(chosenPallete: $chosenPallete)
+                .sheet(isPresented: $showPaletteEditor) { //popover
+                    PaletteEditor(isShowing: self.$showPaletteEditor, chosenPallete: $chosenPallete)
                         .environmentObject(self.document)
                         .frame(minWidth: 300, minHeight: 500)
                 }
@@ -40,14 +41,27 @@ struct PalleteChooser: View {
 struct PaletteEditor: View {
     @EnvironmentObject var document: EmojiArtDocument
     
+    @Binding var isShowing: Bool
     @Binding var chosenPallete: String
+    
     @State private var paletteName: String = ""
     @State private var emojisToAdd: String = ""
     
     var body: some View {
         VStack(spacing: 0){
-            Text("Редактор наборов эмоджи").font(.headline).padding()
+            
+            ZStack{
+                Text("Редактор наборов эмоджи").font(.headline).padding()
+                HStack{
+                    Spacer()
+                    Button(action: {self.isShowing = false}, label: {
+                      Text("Done")
+                    }).padding()
+                }
+            }
+            
             Divider()
+            
             Form {
                 Section {
                     TextField("Имя набора", text: $paletteName, onEditingChanged: { began in
