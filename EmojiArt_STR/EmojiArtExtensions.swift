@@ -133,3 +133,15 @@ extension EmojiArt.Emoji {
 extension Data{
     var utf8: String? { String(data: self, encoding: .utf8)}
 }
+
+extension String {
+    func uniqued() -> String {
+        var uniqued = ""
+        for ch in self {
+            if !uniqued.contains(ch) {
+                uniqued.append(ch)
+            }
+        }
+        return uniqued
+    }
+}
