@@ -19,9 +19,9 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable {
     @Published var steadyStateZoomScale: CGFloat = 1.0
     @Published var steadyStatePanOffset: CGSize = .zero
     //Выбранные эмоджи
-    @Published private(set) var selectedEmojis = Set<EmojiArt.Emoji>()
+    @Published var selectedEmojis = Set<EmojiArt.Emoji>()
     
-    private let defaultEmojiSize: CGFloat = 50
+    let defaultEmojiSize: CGFloat = 50
     
     //private static let untitled = "EmojiArtDocument.untitled"
     

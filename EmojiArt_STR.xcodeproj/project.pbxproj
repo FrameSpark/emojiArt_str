@@ -26,6 +26,7 @@
 		D6BFF285278B2CCF00FE3A90 /* EmojiArtDocumentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BFF284278B2CCF00FE3A90 /* EmojiArtDocumentStore.swift */; };
 		D6BFF288278B382300FE3A90 /* EmojiArtDocumentChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BFF287278B382300FE3A90 /* EmojiArtDocumentChooser.swift */; };
 		D6BFF28B278B498800FE3A90 /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BFF28A278B498800FE3A90 /* EditableText.swift */; };
+		D6BFF28E278C360800FE3A90 /* TextAdder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BFF28D278C360800FE3A90 /* TextAdder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		D6BFF284278B2CCF00FE3A90 /* EmojiArtDocumentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocumentStore.swift; sourceTree = "<group>"; };
 		D6BFF287278B382300FE3A90 /* EmojiArtDocumentChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocumentChooser.swift; sourceTree = "<group>"; };
 		D6BFF28A278B498800FE3A90 /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
+		D6BFF28D278C360800FE3A90 /* TextAdder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAdder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				D68BAD372786DCAC00FD3EA7 /* LaunchScreen.storyboard */,
 				D68BAD3A2786DCAC00FD3EA7 /* Info.plist */,
 				D68BAD342786DCAC00FD3EA7 /* Preview Content */,
+				D6BFF28D278C360800FE3A90 /* TextAdder.swift */,
 			);
 			path = EmojiArt_STR;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				D68BAD2F2786DCA400FD3EA7 /* SceneDelegate.swift in Sources */,
 				D6BFF27C278B02A000FE3A90 /* EmojiArtDocumentPallete.swift in Sources */,
 				D68BAD492786F52400FD3EA7 /* EmojiArtExtensions.swift in Sources */,
+				D6BFF28E278C360800FE3A90 /* TextAdder.swift in Sources */,
 				D68BAD462786E87700FD3EA7 /* EmojiArt.swift in Sources */,
 				D68BAD312786DCA400FD3EA7 /* EmojiArtDocumentView.swift in Sources */,
 				D6BFF282278B209900FE3A90 /* GridLayout.swift in Sources */,

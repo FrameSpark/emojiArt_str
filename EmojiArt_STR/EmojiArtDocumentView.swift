@@ -13,6 +13,7 @@ struct EmojiArtDocumentView: View {
     @State private var chosenPallete: String = ""
     @State private var explainBackgroundPaste = false
     @State private var confirmBackgroundPaste = false
+    @State private var showTextAdder = false
     
     init(document: EmojiArtDocument){
         self.document = document
@@ -33,12 +34,20 @@ struct EmojiArtDocumentView: View {
                     }
                 }
             }
-            Button(action: {
-                for emoji in document.selectedEmojis {
-                    self.document.deleteEmoji(emoji)
+            HStack {
+                Button(action: {
+                    for emoji in document.selectedEmojis {
+                        self.document.deleteEmoji(emoji)
+                    }
+                }) {
+                    Text("Удалить")
                 }
-            }) {
-                Text("Remove")
+                
+                Button(action: {
+                    document.unSelectAllEmojis()
+                }) {
+                    Text("Снять выделения")
+                }
             }
             .opacity(isSelection() ? 1 : 0)
             .padding()
@@ -82,20 +91,36 @@ struct EmojiArtDocumentView: View {
                     location = CGPoint(x: location.x / self.zoomScale, y: location.y / self.zoomScale)
                     return self.drop(providers: providers, at: location)
                 }
-                .navigationBarItems(trailing: Button(action: {
-                    if let url = UIPasteboard.general.url , url != self.document.backgroundURL {
-                        self.confirmBackgroundPaste = true
-                    } else{
-                        self.explainBackgroundPaste = true
-                    }
-                },
-                label: {Image(systemName: "doc.on.clipboard").imageScale(.large)
-                    .alert(isPresented: self.$explainBackgroundPaste) { () -> Alert in
-                        return Alert(title: Text("Вставка фона"),
-                                     message: Text("Скопируйте URL изображения и нажмите кнопку"),
-                                     dismissButton: .default(Text("OK")))
-                    }
-                }))
+                .navigationBarItems(trailing:
+                                        HStack {
+                                            //Кнопка вставки фона
+                                            Button(action: {
+                                                if let url = UIPasteboard.general.url , url != self.document.backgroundURL {
+                                                    self.confirmBackgroundPaste = true
+                                                } else{
+                                                    self.explainBackgroundPaste = true
+                                                }
+                                            },
+                                            label: {Image(systemName: "doc.on.clipboard").imageScale(.large)
+                                                .alert(isPresented: self.$explainBackgroundPaste) { () -> Alert in
+                                                    return Alert(title: Text("Вставка фона"),
+                                                                 message: Text("Скопируйте URL изображения и нажмите кнопку"),
+                                                                 dismissButton: .default(Text("OK")))
+                                                }
+                                            })
+                                            //Кнопка вставки текста
+                                         Image(systemName: "pencil")
+                                            .imageScale(.large)
+                                            .onTapGesture {
+                                                self.showTextAdder = true
+                                            }
+                                            .popover(isPresented: $showTextAdder) {
+                                                TextAdder(isShowing: self.$showTextAdder)
+                                                    .environmentObject(self.document)
+                                                    .frame(minWidth: 500, minHeight: 500)
+                                            }
+                        }
+                )
             }
             .zIndex(-1)
         }
